@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject private var user = User()
     
+    @State private var showingSheet = false
+    
+    
+    
     var body: some View {
         VStack {
             Text("Name: \(user.firstName) \(user.lastName)")
@@ -21,6 +25,13 @@ struct ContentView: View {
             TextField("Last Name", text: $user.lastName)
                 .padding([.leading, .trailing, .bottom])
                 .textFieldStyle(.roundedBorder)
+            
+            Button("Show Sheet") {
+                showingSheet.toggle()
+            }
+        }
+        .sheet(isPresented: $showingSheet) {
+            SheetView(name: "\(user.firstName) \(user.lastName)")
         }
     }
 }
