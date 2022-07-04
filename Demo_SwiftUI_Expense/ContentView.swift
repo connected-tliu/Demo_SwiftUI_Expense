@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject private var user = User()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text("Name: \(user.firstName) \(user.lastName)")
+                .padding()
+            
+            TextField("First Name", text: $user.firstName)
+                .padding([.top, .leading, .trailing])
+                .textFieldStyle(.roundedBorder)
+            TextField("Last Name", text: $user.lastName)
+                .padding([.leading, .trailing, .bottom])
+                .textFieldStyle(.roundedBorder)
+        }
     }
 }
 
